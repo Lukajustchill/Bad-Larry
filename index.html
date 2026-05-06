@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What Kind of CEO Are You?</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #09101f;
+      --card: #111827;
+      --card-border: #1e2d47;
+      --gold: #f0b429;
+      --gold-light: #ffd97d;
+      --gold-dim: rgba(240,180,41,0.15);
+      --red: #e05252;
+      --blue: #4f9cf9;
+      --text: #e8edf5;
+      --text-muted: #6b7a96;
+      --radius: 14px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 48px 16px;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 60vh;
+      background: radial-gradient(ellipse at 50% -10%, rgba(240,180,41,0.07) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 660px;
+    }
+
+    /* ─── SCREENS ─── */
+    .screen { display: none; animation: fadeUp 0.4s ease; }
+    .screen.active { display: block; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── TYPOGRAPHY ─── */
+    .label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: var(--gold-dim);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    /* ─── BUTTONS ─── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      border-radius: 9px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      letter-spacing: 0.01em;
+      font-family: inherit;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: #090e1a;
+    }
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 28px rgba(240,180,41,0.28);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--card-border);
+    }
+    .btn-ghost:hover {
+      color: var(--text);
+      border-color: #3a4a6a;
+      background: var(--card);
+    }
+
+    /* ─── INTRO ─── */
+    #screen-intro {
+      padding-top: 20px;
+    }
+    .intro-eyebrow {
+      margin-bottom: 22px;
+    }
+    .intro-title {
+      font-size: clamp(32px, 7vw, 54px);
+      font-weight: 800;
+      line-height: 1.08;
+      margin-bottom: 18px;
+      letter-spacing: -0.025em;
+    }
+    .intro-title em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .intro-sub {
+      color: var(--text-muted);
+      font-size: 16px;
+      line-height: 1.65;
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+    .axis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+    .axis-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .axis-card-name {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 5px;
+    }
+    .axis-card-poles {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .axis-card-poles span { color: var(--text); font-weight: 500; }
+    .intro-meta {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 36px;
+    }
+    .intro-stat {
+      text-align: left;
+    }
+    .intro-stat-num {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    .intro-stat-label {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .intro-divider {
+      width: 1px;
+      background: var(--card-border);
+      align-self: stretch;
+    }
+
+    /* ─── QUIZ ─── */
+    .progress-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+    .progress-track {
+      flex: 1;
+      height: 3px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, rgba(240,180,41,0.6), var(--gold));
+      border-radius: 3px;
+      transition: width 0.45s cubic-bezier(.4,0,.2,1);
+    }
+    .progress-num {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .q-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .q-axis-name {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .q-type-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--card-border);
+      padding: 2px 9px;
+      border-radius: 20px;
+      letter-spacing: 0.05em;
+    }
+
+    .q-text {
+      font-size: clamp(17px, 3.2vw, 21px);
+      font-weight: 700;
+      line-height: 1.42;
+      margin-bottom: 28px;
+      letter-spacing: -0.015em;
+    }
+
+    .choices {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+    .choice {
+      background: var(--card);
+      border: 2px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+    }
+    .choice:hover {
+      border-color: #354d70;
+      background: #162035;
+      transform: translateY(-1px);
+    }
+    .choice-badge {
+      font-size: 12px;
+      font-weight: 800;
+      width: 26px;
+      height: 26px;
+      min-width: 26px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.06);
+      color: var(--text-muted);
+      letter-spacing: 0;
+      transition: all 0.2s ease;
+    }
+    .choice-text {
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: var(--text);
+      padding-top: 3px;
+    }
+
+    .choice.sel-a {
+      border-color: var(--red);
+      background: rgba(224, 82, 82, 0.07);
+    }
+    .choice.sel-a .choice-badge {
+      color: var(--red);
+      background: rgba(224,82,82,0.18);
+    }
+    .choice.sel-b {
+      border-color: var(--blue);
+      background: rgba(79, 156, 249, 0.07);
+    }
+    .choice.sel-b .choice-badge {
+      color: var(--blue);
+      background: rgba(79,156,249,0.18);
+    }
+
+    .quiz-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 26px;
+    }
+    .quiz-hint {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ─── RESULTS ─── */
+    .results-top {
+      text-align: center;
+      padding: 36px 0 44px;
+    }
+    .results-eyebrow {
+      margin-bottom: 18px;
+    }
+    .type-code {
+      font-size: clamp(60px, 16vw, 96px);
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      line-height: 1;
+      background: linear-gradient(140deg, var(--gold), var(--gold-light) 60%, #fff6d0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+    .type-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      letter-spacing: 0.03em;
+    }
+
+    .scores-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 28px;
+    }
+    .scores-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+
+    .axis-row {
+      margin-bottom: 26px;
+    }
+    .axis-row:last-child { margin-bottom: 0; }
+
+    .axis-row-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+    .axis-row-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .axis-row-score {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .bar-track {
+      position: relative;
+      height: 8px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 4px;
+      margin-bottom: 7px;
+    }
+    .bar-center-line {
+      position: absolute;
+      left: 50%;
+      top: -3px;
+      width: 2px;
+      height: 14px;
+      background: rgba(255,255,255,0.1);
+      transform: translateX(-50%);
+      border-radius: 1px;
+    }
+    .bar-fill {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      border-radius: 4px;
+    }
+    .bar-fill.neg {
+      right: 50%;
+      background: linear-gradient(to left, #e05252, #c03030);
+    }
+    .bar-fill.pos {
+      left: 50%;
+      background: linear-gradient(to right, #4f9cf9, #2577dc);
+    }
+
+    .bar-poles {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .results-footer {
+      text-align: center;
+    }
+    .results-credit {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ─── INTRO ─── -->
+  <div class="screen active" id="screen-intro">
+    <div class="intro-eyebrow"><span class="label">CEO Personality Quiz</span></div>
+    <h1 class="intro-title">What Kind of<br><em>CEO Are You?</em></h1>
+    <p class="intro-sub">Pick A or B for each question. You'll get a raw score across four leadership axes and a 4-letter CEO type.</p>
+
+    <div class="intro-meta">
+      <div class="intro-stat">
+        <div class="intro-stat-num">12</div>
+        <div class="intro-stat-label">Questions</div>
+      </div>
+      <div class="intro-divider"></div>
+      <div class="intro-stat">
+        <div class="intro-stat-num">4</div>
+        <div class="intro-stat-label">Axes</div>
+      </div>
+      <div class="intro-divider"></div>
+      <div class="intro-stat">
+        <div class="intro-stat-num">~3</div>
+        <div class="intro-stat-label">Minutes</div>
+      </div>
+    </div>
+
+    <div class="axis-grid">
+      <div class="axis-card">
+        <div class="axis-card-name">Approach</div>
+        <div class="axis-card-poles"><span>People</span> → <span>Systems</span></div>
+      </div>
+      <div class="axis-card">
+        <div class="axis-card-name">Risk Tolerance</div>
+        <div class="axis-card-poles"><span>Defender</span> → <span>Risk Taker</span></div>
+      </div>
+      <div class="axis-card">
+        <div class="axis-card-name">Social Aptitude</div>
+        <div class="axis-card-poles"><span>Introvert</span> → <span>Extrovert</span></div>
+      </div>
+      <div class="axis-card">
+        <div class="axis-card-name">Spontaneity</div>
+        <div class="axis-card-poles"><span>Managed</span> → <span>Adaptive</span></div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" onclick="startQuiz()">Begin the Quiz &rarr;</button>
+  </div>
+
+  <!-- ─── QUIZ ─── -->
+  <div class="screen" id="screen-quiz">
+    <div class="progress-row">
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+      <div class="progress-num" id="progress-num">1 / 12</div>
+    </div>
+
+    <div class="q-meta">
+      <span class="q-axis-name" id="q-axis-name"></span>
+      <span class="q-type-tag" id="q-type-tag"></span>
+    </div>
+    <div class="q-text" id="q-text"></div>
+
+    <div class="choices" id="choices"></div>
+
+    <div class="quiz-footer">
+      <button class="btn btn-ghost" id="btn-back" onclick="goBack()" style="visibility:hidden">&#8592; Back</button>
+      <span class="quiz-hint" id="quiz-hint">Pick an answer to continue</span>
+    </div>
+  </div>
+
+  <!-- ─── RESULTS ─── -->
+  <div class="screen" id="screen-results">
+    <div class="results-top">
+      <div class="results-eyebrow"><span class="label">Your CEO Type</span></div>
+      <div class="type-code" id="type-code"></div>
+      <div class="type-desc" id="type-desc"></div>
+    </div>
+
+    <div class="scores-card">
+      <div class="scores-title">Raw Axis Scores &nbsp;(−9 to +9)</div>
+      <div id="axes-output"></div>
+    </div>
+
+    <div class="results-footer">
+      <p class="results-credit">CEO Quiz Project &middot; Roy Persson + Luke &middot; 2025</p>
+      <button class="btn btn-ghost" onclick="retake()">&#8617; Retake Quiz</button>
+    </div>
+  </div>
+
+</div>
+<script>
+  const AXES = [
+    { name: 'Approach',        negLabel: 'People',    posLabel: 'Systems',     negLetter: 'P', posLetter: 'S' },
+    { name: 'Risk Tolerance',  negLabel: 'Defender',  posLabel: 'Risk Taker',  negLetter: 'D', posLetter: 'R' },
+    { name: 'Social Aptitude', negLabel: 'Introvert', posLabel: 'Extrovert',   negLetter: 'I', posLetter: 'E' },
+    { name: 'Spontaneity',     negLabel: 'Managed',   posLabel: 'Adaptive',    negLetter: 'M', posLetter: 'A' },
+  ];
+
+  const QUESTIONS = [
+    {
+      axis: 0, tag: 'Business',
+      text: "You're hiring for a critical senior role. Do you prioritize an inspiring leader who energizes the team, or a world-class operator who builds scalable systems?",
+      a: "“The inspiring leader — great culture and aligned people are what actually drives results.”",
+      b: "“The operator — I need someone who builds systems that scale. Performance follows structure.”",
+    },
+    {
+      axis: 0, tag: 'Everyday',
+      text: "You’re moving into a new apartment. What do you tackle first?",
+      a: "“Call a few friends to help out — even if it’s still a mess by the end, it’s a better day.”",
+      b: "“Get the logistics sorted — boxes unpacked, furniture placed, everything in its right spot before I relax.”",
+    },
+    {
+      axis: 0, tag: 'Fun',
+      text: "Your workspace at the end of a typical week looks like…",
+      a: "“Controlled chaos — I know where everything is, it just doesn’t look like it to anyone else.”",
+      b: "“Tidy. Everything has a place. Clutter kills my focus.”",
+    },
+    {
+      axis: 1, tag: 'Business',
+      text: "A high-potential new market opens up. There’s a real first-mover advantage, but the risk is significant. What do you do?",
+      a: "“We move carefully. I want due diligence done before we commit — first-mover advantages are often overrated.”",
+      b: "“We move fast. If we wait for certainty we’ll be second. Get in, learn, and adjust on the fly.”",
+    },
+    {
+      axis: 1, tag: 'Everyday',
+      text: "Your friends suggest a last-minute road trip leaving in two hours. You’re in. What’s your move?",
+      a: "“I need to know the route, where we’re staying, and that we have everything before we leave.”",
+      b: "“Throw a bag in the car and figure it out. The adventure is the whole point.”",
+    },
+    {
+      axis: 1, tag: 'Fun',
+      text: "You’re at a restaurant and spot a dish on the menu you’ve never heard of. What do you do?",
+      a: "“Ask the server exactly what’s in it. I want to know what I’m getting before I commit.”",
+      b: "“Order it immediately — if it’s a disaster I’ll get something else. That’s half the fun.”",
+    },
+    {
+      axis: 2, tag: 'Business',
+      text: "Your team needs to align on a critical strategic decision. How do you prefer to work through it?",
+      a: "“A well-structured memo or written brief. I think better on paper, and the best thinking doesn’t need a room.”",
+      b: "“Get everyone together. The energy and ideas that come from live conversation are hard to replicate.”",
+    },
+    {
+      axis: 2, tag: 'Everyday',
+      text: "You had an intense, draining week. What’s your ideal Friday night?",
+      a: "“Quiet night in — dinner at home, something good to watch, zero obligations. I need the reset.”",
+      b: "“Out with friends. Good people and good conversation are exactly what refuel me.”",
+    },
+    {
+      axis: 2, tag: 'Fun',
+      text: "You walk into a networking event where you know almost no one. What happens?",
+      a: "“I find one or two interesting people and go deep. A few real conversations beat a room full of small talk.”",
+      b: "“I work the room. Meeting new people energizes me and I’m good at it.”",
+    },
+    {
+      axis: 3, tag: 'Business',
+      text: "A major project hits an unexpected obstacle mid-execution. How do you respond?",
+      a: "“We pause, reassess, and rebuild a clear plan before moving forward. I need structure to move well.”",
+      b: "“We adapt on the fly. I’d rather pivot fast and keep momentum than stop and lose ground.”",
+    },
+    {
+      axis: 3, tag: 'Everyday',
+      text: "A friend calls with a last-minute invite for tonight. You had no plans. What do you do?",
+      a: "“I’d probably pass — I’d mentally settled into a quiet evening, and changing course last-minute feels disruptive.”",
+      b: "“I’m in. I thrive on the unplanned. Last-minute energy is often the best kind.”",
+    },
+    {
+      axis: 3, tag: 'Fun',
+      text: "You’re planning a vacation. What does your itinerary look like?",
+      a: "“Fully planned — accommodation booked, activities researched, each day mapped out. That’s when I actually relax.”",
+      b: "“Loose at best. I book the flight and figure out the rest when I get there. Discovery is the whole point.”",
+    },
+  ];
+
+  let answers = new Array(12).fill(null);
+  let current = 0;
+  let advancing = false;
+
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById(id);
+    el.classList.add('active');
+    el.style.animation = 'none';
+    requestAnimationFrame(() => { el.style.animation = ''; });
+  }
+
+  function startQuiz() {
+    answers = new Array(12).fill(null);
+    current = 0;
+    advancing = false;
+    renderQuestion();
+    showScreen('screen-quiz');
+  }
+
+  function renderQuestion() {
+    const q = QUESTIONS[current];
+    const axis = AXES[q.axis];
+    const sel = answers[current];
+
+    document.getElementById('q-axis-name').textContent = axis.name;
+    document.getElementById('q-type-tag').textContent = q.tag;
+    document.getElementById('q-text').textContent = q.text;
+    document.getElementById('progress-num').textContent = `${current + 1} / 12`;
+    document.getElementById('progress-fill').style.width = `${(current / 12) * 100}%`;
+    document.getElementById('btn-back').style.visibility = current === 0 ? 'hidden' : 'visible';
+    document.getElementById('quiz-hint').textContent = sel ? '' : 'Pick an answer to continue';
+
+    document.getElementById('choices').innerHTML = `
+      <div class="choice${sel === 'a' ? ' sel-a' : ''}" onclick="pick('a')">
+        <span class="choice-badge">A</span>
+        <span class="choice-text">${q.a}</span>
+      </div>
+      <div class="choice${sel === 'b' ? ' sel-b' : ''}" onclick="pick('b')">
+        <span class="choice-badge">B</span>
+        <span class="choice-text">${q.b}</span>
+      </div>
+    `;
+  }
+
+  function pick(choice) {
+    if (advancing) return;
+    answers[current] = choice;
+    renderQuestion();
+    advancing = true;
+    setTimeout(() => {
+      advancing = false;
+      if (current < 11) {
+        current++;
+        renderQuestion();
+      } else {
+        showResults();
+      }
+    }, 350);
+  }
+
+  function goBack() {
+    if (advancing) return;
+    if (current > 0) {
+      current--;
+      renderQuestion();
+    } else {
+      showScreen('screen-intro');
+    }
+  }
+
+  function showResults() {
+    const scores = [0, 0, 0, 0];
+    QUESTIONS.forEach((q, i) => {
+      scores[q.axis] += answers[i] === 'a' ? -3 : 3;
+    });
+
+    const letters = scores.map((s, i) => s < 0 ? AXES[i].negLetter : AXES[i].posLetter);
+    const typeCode = letters.join('');
+
+    document.getElementById('type-code').textContent = typeCode;
+    document.getElementById('type-desc').textContent =
+      scores.map((s, i) => `${AXES[i].name}: ${s > 0 ? '+' : ''}${s}`).join(' · ');
+
+    document.getElementById('axes-output').innerHTML = scores.map((score, i) => {
+      const ax = AXES[i];
+      const isNeg = score < 0;
+      const pct = (Math.abs(score) / 9) * 50;
+      const fillStyle = isNeg
+        ? `class="bar-fill neg" style="width:${pct}%"`
+        : `class="bar-fill pos" style="width:${pct}%"`;
+      const scoreStr = (score > 0 ? '+' : '') + score;
+      return `
+        <div class="axis-row">
+          <div class="axis-row-header">
+            <span class="axis-row-name">${ax.name}</span>
+            <span class="axis-row-score">${scoreStr}</span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-center-line"></div>
+            <div ${fillStyle}></div>
+          </div>
+          <div class="bar-poles">
+            <span>${ax.negLabel} &nbsp;&minus;9</span>
+            <span>+9&nbsp; ${ax.posLabel}</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    showScreen('screen-results');
+  }
+
+  function retake() {
+    answers = new Array(12).fill(null);
+    current = 0;
+    showScreen('screen-intro');
+  }
+</script>
+</body>
+</html>
