@@ -537,6 +537,138 @@
       font-weight: 500;
     }
 
+    /* ─── DEMOGRAPHICS ─── */
+    .demo-screen-title {
+      font-size: clamp(22px, 5vw, 32px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .demo-screen-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+    .demo-question {
+      margin-bottom: 32px;
+    }
+    .demo-question-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .demo-question-text {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 14px;
+    }
+    .demo-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .demo-options-scale {
+      flex-wrap: nowrap;
+    }
+    .demo-options-scale .demo-opt {
+      flex: 1;
+      text-align: center;
+      padding: 10px 8px;
+      font-size: 12px;
+    }
+    .demo-scale-poles {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 7px;
+      padding: 0 2px;
+    }
+    .demo-opt {
+      background: var(--card);
+      border: 2px solid var(--card-border);
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.18s ease;
+    }
+    .demo-opt:hover {
+      border-color: #354d70;
+      color: var(--text);
+      background: #162035;
+    }
+    .demo-opt.selected {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: var(--gold-dim);
+    }
+    .demo-footer {
+      margin-top: 8px;
+    }
+    .btn-primary:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* ─── HEADLINE (Path B) ─── */
+    .headline-eyebrow { margin-bottom: 20px; }
+    .headline-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-left: 4px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 28px 28px 28px 24px;
+      margin-bottom: 8px;
+    }
+    .headline-source {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .headline-hed {
+      font-size: clamp(18px, 4vw, 26px);
+      font-weight: 800;
+      line-height: 1.28;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+    .headline-body {
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--text-muted);
+    }
+    .headline-img {
+      width: 100%;
+      border-radius: 8px;
+      display: block;
+      margin-bottom: 18px;
+      object-fit: cover;
+      max-height: 260px;
+    }
+    .headline-context {
+      font-size: 12px;
+      color: var(--text-muted);
+      opacity: 0.6;
+      margin-top: 28px;
+      font-style: italic;
+    }
+
+    /* ─── RESULTS ─── */
     .results-footer {
       text-align: center;
     }
@@ -605,8 +737,8 @@
         <div class="axis-card-poles"><span>Defender</span> → <span>Risk Taker</span></div>
       </div>
       <div class="axis-card">
-        <div class="axis-card-name">Social Aptitude</div>
-        <div class="axis-card-poles"><span>Introvert</span> → <span>Extrovert</span></div>
+        <div class="axis-card-name">Apathy</div>
+        <div class="axis-card-poles"><span>Concerned</span> → <span>Inert</span></div>
       </div>
       <div class="axis-card">
         <div class="axis-card-name">Spontaneity</div>
@@ -637,6 +769,68 @@
     <div class="quiz-footer">
       <button class="btn btn-ghost" id="btn-back" onclick="goBack()" style="visibility:hidden">&#8592; Back</button>
       <span class="quiz-hint" id="quiz-hint">Pick an answer to continue</span>
+    </div>
+  </div>
+
+  <!-- ─── HEADLINE (Path B) ─── -->
+  <div class="screen" id="screen-headline">
+    <div class="headline-eyebrow"><span class="label" id="headline-tag"></span></div>
+    <div class="headline-card" id="headline-card">
+      <img class="headline-img" id="headline-img" src="" alt="" />
+      <div class="headline-source">Latest News</div>
+      <h2 class="headline-hed" id="headline-hed"></h2>
+      <p class="headline-body" id="headline-body"></p>
+    </div>
+    <p class="headline-context">Take a moment to read the above before continuing.</p>
+    <button class="btn btn-primary" onclick="continueFromHeadline()" style="margin-top:28px">Continue &rarr;</button>
+  </div>
+
+  <!-- ─── DEMOGRAPHICS ─── -->
+  <div class="screen" id="screen-demographics">
+    <div class="intro-eyebrow"><span class="label">Almost There</span></div>
+    <h2 class="demo-screen-title">A couple of quick questions</h2>
+    <p class="demo-screen-sub">These help us understand our participants. Your answers are anonymous.</p>
+
+    <div class="demo-question">
+      <div class="demo-question-label">Gender</div>
+      <div class="demo-question-text">Gender assigned at birth</div>
+      <div class="demo-options" id="demo-gender-options">
+        <button class="demo-opt" onclick="selectDemo('gender', 'Man', this)">Man</button>
+        <button class="demo-opt" onclick="selectDemo('gender', 'Woman', this)">Woman</button>
+        <button class="demo-opt" onclick="selectDemo('gender', 'Prefer not to say', this)">Prefer not to say</button>
+      </div>
+    </div>
+
+    <div class="demo-question">
+      <div class="demo-question-label">Age</div>
+      <div class="demo-question-text">What is your age group?</div>
+      <div class="demo-options" id="demo-age-options">
+        <button class="demo-opt" onclick="selectDemo('age', 'Under 25', this)">Under 25</button>
+        <button class="demo-opt" onclick="selectDemo('age', '25–40', this)">25–40</button>
+        <button class="demo-opt" onclick="selectDemo('age', '40–55', this)">40–55</button>
+        <button class="demo-opt" onclick="selectDemo('age', '55+', this)">55+</button>
+      </div>
+    </div>
+
+    <div class="demo-question">
+      <div class="demo-question-label">Political Identity</div>
+      <div class="demo-question-text">Which best describes your political views?</div>
+      <div class="demo-options demo-options-scale" id="demo-politic-options">
+        <button class="demo-opt" onclick="selectDemo('politic', 'Very Liberal', this)">Very Liberal</button>
+        <button class="demo-opt" onclick="selectDemo('politic', 'Mostly Liberal', this)">Mostly Liberal</button>
+        <button class="demo-opt" onclick="selectDemo('politic', 'Slightly Liberal', this)">Slightly Liberal</button>
+        <button class="demo-opt" onclick="selectDemo('politic', 'Slightly Conservative', this)">Slightly Conservative</button>
+        <button class="demo-opt" onclick="selectDemo('politic', 'Mostly Conservative', this)">Mostly Conservative</button>
+        <button class="demo-opt" onclick="selectDemo('politic', 'Very Conservative', this)">Very Conservative</button>
+      </div>
+      <div class="demo-scale-poles">
+        <span>Very Liberal</span>
+        <span>Very Conservative</span>
+      </div>
+    </div>
+
+    <div class="demo-footer">
+      <button class="btn btn-primary" id="btn-see-results" onclick="finishDemographics()" disabled>See My Results &rarr;</button>
     </div>
   </div>
 
@@ -760,7 +954,7 @@
   const AXES = [
     { name: 'Approach',        negLabel: 'People',    posLabel: 'Systems'    },
     { name: 'Risk Tolerance',  negLabel: 'Defender',  posLabel: 'Risk Taker' },
-    { name: 'Social Aptitude', negLabel: 'Introvert', posLabel: 'Extrovert'  },
+    { name: 'Apathy',          negLabel: 'Concerned',  posLabel: 'Inert'      },
     { name: 'Spontaneity',     negLabel: 'Managed',   posLabel: 'Adaptive'   },
   ];
 
@@ -776,81 +970,117 @@
   const QUESTIONS = [
     {
       axis: 0, tag: 'Business',
-      text: "You're hiring for a critical senior role. Do you prioritize an inspiring leader who energizes the team, or a world-class operator who builds scalable systems?",
-      a: "“The inspiring leader — great culture and aligned people are what actually drives results.”",
-      b: "“The operator — I need someone who builds systems that scale. Performance follows structure.”",
+      text: "You're hiring for a critical senior role. Do you prioritize a leader who motivates and engages your team — or someone focused on building highly efficient, scalable systems?",
+      a: `"The leader who motivates and engages — inspired, connected people are what actually drives results."`,
+      b: `"The systems builder — I need someone designing highly efficient, scalable systems. Performance follows structure."`,
     },
     {
       axis: 0, tag: 'Everyday',
-      text: "You’re moving into a new apartment. What do you tackle first?",
-      a: "“Call a few friends to help out — even if it’s still a mess by the end, it’s a better day.”",
-      b: "“Get the logistics sorted — boxes unpacked, furniture placed, everything in its right spot before I relax.”",
+      text: "A close friend agreed to help someone move out of their apartment. After the packing was done, they didn't show up on moving day. How wrong was that?",
+      a: `"Extremely wrong — if you commit to someone, you show up. You don't treat people that way."`,
+      b: `"Things happen. People have to understand that life gets in the way sometimes."`,
     },
     {
-      axis: 0, tag: 'Fun',
-      text: "Your workspace at the end of a typical week looks like…",
-      a: "“Controlled chaos — I know where everything is, it just doesn’t look like it to anyone else.”",
-      b: "“Tidy. Everything has a place. Clutter kills my focus.”",
+      axis: 0, tag: 'Everyday',
+      text: "Someone on your team has a full week of unused vacation that expires at year-end. Company policy is clear: it's lost, no payout, no exceptions. What do you do?",
+      a: `"I tell them to take the full week off and cover for them — I'll make up an excuse to management if needed."`,
+      b: `"I remind them of the policy and leave it there. It's not my job to take risks because they didn't manage their own schedule."`,
     },
     {
       axis: 1, tag: 'Business',
-      text: "A high-potential new market opens up. There’s a real first-mover advantage, but the risk is significant. What do you do?",
-      a: "“We move carefully. I want due diligence done before we commit — first-mover advantages are often overrated.”",
-      b: "“We move fast. If we wait for certainty we’ll be second. Get in, learn, and adjust on the fly.”",
+      text: "A high-potential new market opens up. There's a real first-mover advantage, but the risk is significant. What do you do?",
+      a: `"We move carefully. I want due diligence done before we commit — first-mover advantages are often overrated."`,
+      b: `"We move fast. If we wait for certainty we'll be second. Get in, learn, and adjust on the fly."`,
     },
     {
       axis: 1, tag: 'Everyday',
-      text: "Your friends suggest a last-minute road trip leaving in two hours. You’re in. What’s your move?",
-      a: "“I need to know the route, where we’re staying, and that we have everything before we leave.”",
-      b: "“Throw a bag in the car and figure it out. The adventure is the whole point.”",
+      text: "Your friends suggest a last-minute road trip leaving in two hours. You're in. What's your move?",
+      a: `"I need to know the route, where we're staying, and that we have everything before we leave."`,
+      b: `"Throw a bag in the car and figure it out. The adventure is the whole point."`,
     },
     {
       axis: 1, tag: 'Fun',
-      text: "You’re at a restaurant and spot a dish on the menu you’ve never heard of. What do you do?",
-      a: "“Ask the server exactly what’s in it. I want to know what I’m getting before I commit.”",
-      b: "“Order it immediately — if it’s a disaster I’ll get something else. That’s half the fun.”",
+      text: "You're at a restaurant and spot a dish on the menu you've never heard of. What do you do?",
+      a: `"Ask the server exactly what's in it. I want to know what I'm getting before I commit."`,
+      b: `"Order it immediately — if it's a disaster I'll get something else. That's half the fun."`,
     },
     {
       axis: 2, tag: 'Business',
-      text: "Your team needs to align on a critical strategic decision. How do you prefer to work through it?",
-      a: "“A well-structured memo or written brief. I think better on paper, and the best thinking doesn’t need a room.”",
-      b: "“Get everyone together. The energy and ideas that come from live conversation are hard to replicate.”",
+      text: "How important is it that companies do more than just focus on running their business?",
+      a: `"Companies have responsibilities beyond just making products for their customers — they should actively engage with societal issues."`,
+      b: `"The purpose of a company is not to manage societal problems. That's not what businesses are built for."`,
     },
     {
       axis: 2, tag: 'Everyday',
-      text: "You had an intense, draining week. What’s your ideal Friday night?",
-      a: "“Quiet night in — dinner at home, something good to watch, zero obligations. I need the reset.”",
-      b: "“Out with friends. Good people and good conversation are exactly what refuel me.”",
+      text: "You're checking out at a store and the screen prompts you to round up to the nearest dollar for a homelessness charity. What do you do?",
+      a: `"I'd be happy to donate even more than just rounding up — it's a small amount for a good cause."`,
+      b: `"I prefer not to donate to causes at the checkout."`,
     },
     {
       axis: 2, tag: 'Fun',
-      text: "You walk into a networking event where you know almost no one. What happens?",
-      a: "“I find one or two interesting people and go deep. A few real conversations beat a room full of small talk.”",
-      b: "“I work the room. Meeting new people energizes me and I’m good at it.”",
+      text: "You're running a billion-dollar company that has no philanthropic or charitable arm. How wrong is that?",
+      a: `"Morally wrong — companies that earn that much and don't find ways to give back are failing society."`,
+      b: `"A company shouldn't be judged for its charitable contributions or lack thereof."`,
     },
     {
       axis: 3, tag: 'Business',
-      text: "A major project hits an unexpected obstacle mid-execution. How do you respond?",
-      a: "“We pause, reassess, and rebuild a clear plan before moving forward. I need structure to move well.”",
-      b: "“We adapt on the fly. I’d rather pivot fast and keep momentum than stop and lose ground.”",
+      text: "You've quickly gathered some information on an emerging situation at work. How do you respond?",
+      a: `"I pause — review what I have more carefully before committing to a direction."`,
+      b: `"I move on it immediately. Speed matters, and I'll adjust as more information comes in."`,
     },
     {
       axis: 3, tag: 'Everyday',
-      text: "A friend calls with a last-minute invite for tonight. You had no plans. What do you do?",
-      a: "“I’d probably pass — I’d mentally settled into a quiet evening, and changing course last-minute feels disruptive.”",
-      b: "“I’m in. I thrive on the unplanned. Last-minute energy is often the best kind.”",
+      text: "A friend calls and shares a juicy story about someone close to both of you. What do you do?",
+      a: `"I need to look into this a bit more before I start passing it along to anyone else."`,
+      b: `"I can't wait to get off the phone so I can call someone else and share what I just heard."`,
     },
     {
       axis: 3, tag: 'Fun',
-      text: "You’re planning a vacation. What does your itinerary look like?",
-      a: "“Fully planned — accommodation booked, activities researched, each day mapped out. That’s when I actually relax.”",
-      b: "“Loose at best. I book the flight and figure out the rest when I get there. Discovery is the whole point.”",
+      text: "You're at the airport waiting to board. Your flight is delayed. First you're told the plane hasn't arrived. Then it needed cleaning. Now it's a paperwork issue. Then a weight capacity problem. What do you make of all this?",
+      a: `"Something doesn't add up — I have real doubts about what's actually going on here."`,
+      b: `"Operational issues happen. I take what they say at face value and wait it out."`,
     },
   ];
+
+  const HEADLINES = {
+    0: {
+      tag: 'Industrial Safety',
+      headline: 'U.S. Chemical Safety Board: Didion Milling Failed to Implement Any Safety Recommendations After Deadly 2017 Explosion',
+      body: 'The U.S. Chemical Safety Board said Didion Milling has not implemented any of the safety recommendations given after a deadly explosion in May 2017 in Wisconsin — an explosion that left five employees dead and 14 others severely hurt. The company agreed to pay a $1 million fine and $10.25 million to the estates of the five workers who were killed.',
+      image: 'headline-chemical-safety.png',
+      color: '#e05252',
+    },
+    3: {
+      tag: 'Banking Regulation',
+      headline: 'Regulators Saw Problems at Silicon Valley Bank — But Didn\'t Fix Them Fast Enough',
+      body: '"SVB failed because the bank\'s leadership failed and they didn\'t properly manage the risk," said assembly member Tim Grayson. When state and federal regulators spotted problems at Silicon Valley Bank, they didn\'t do enough to make sure the bank acted quickly to fix them — a key takeaway from a California state report on the bank\'s collapse.',
+      image: 'headline-svb.png',
+      color: '#e07a22',
+    },
+    6: {
+      tag: 'Healthcare Crisis',
+      headline: 'One-Third of Americans Skip Meals or Other Needs to Afford Health Care',
+      body: 'Americans are driving less, skipping meals, and putting off big life moves — like buying homes or having children — to keep up with health care costs. Roughly one-third are cutting back on daily spending to cover medical costs, and about half of middle-income households have delayed a major life event because of the same expenses, as premiums rise and the federal government cuts Medicaid spending.',
+      image: 'headline-healthcare.png',
+      color: '#4a90d9',
+    },
+    9: {
+      tag: 'Misinformation',
+      headline: 'Springfield, Ohio Grapples With Pet-Eating Rumors',
+      body: 'It began with a YouTube clip containing a second-hand account and a Facebook post attributed to the friend of the daughter of a neighbor. The idea that Haitian immigrants were eating pets had already gone viral — spreading to accounts with large followings, until the allegations were repeated by Republican presidential candidates during a nationally televised debate.',
+      image: 'headline-misinformation.png',
+      color: '#a855f7',
+    },
+  };
 
   let answers = new Array(12).fill(null);
   let current = 0;
   let advancing = false;
+  let demoGender = null;
+  let demoAge = null;
+  let demoPolitic = null;
+  let pathVariant = 'A';
+  let headlineShown = {};
 
   function showScreen(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -864,8 +1094,12 @@
     answers = new Array(12).fill(null);
     current = 0;
     advancing = false;
-    renderQuestion();
-    showScreen('screen-quiz');
+    demoGender = null;
+    demoAge = null;
+    demoPolitic = null;
+    pathVariant = Math.random() < 0.5 ? 'A' : 'B';
+    headlineShown = {};
+    advanceToQuestion(0);
   }
 
   function renderQuestion() {
@@ -912,10 +1146,9 @@
     setTimeout(() => {
       advancing = false;
       if (current < 11) {
-        current++;
-        renderQuestion();
+        advanceToQuestion(current + 1);
       } else {
-        showResults();
+        showDemographics();
       }
     }, 350);
   }
@@ -925,9 +1158,57 @@
     if (current > 0) {
       current--;
       renderQuestion();
+      showScreen('screen-quiz');
     } else {
       showScreen('screen-intro');
     }
+  }
+
+  function advanceToQuestion(idx) {
+    current = idx;
+    if (pathVariant === 'B' && HEADLINES[idx] && !headlineShown[idx]) {
+      headlineShown[idx] = true;
+      const h = HEADLINES[idx];
+      document.getElementById('headline-tag').textContent = h.tag;
+      document.getElementById('headline-hed').textContent = h.headline;
+      document.getElementById('headline-body').textContent = h.body;
+      document.getElementById('headline-img').src = h.image;
+      document.getElementById('headline-img').alt = h.headline;
+      document.getElementById('headline-card').style.borderLeftColor = h.color;
+      showScreen('screen-headline');
+    } else {
+      renderQuestion();
+      showScreen('screen-quiz');
+    }
+  }
+
+  function continueFromHeadline() {
+    renderQuestion();
+    showScreen('screen-quiz');
+  }
+
+  function showDemographics() {
+    document.querySelectorAll('#demo-gender-options .demo-opt, #demo-age-options .demo-opt, #demo-politic-options .demo-opt')
+      .forEach(btn => btn.classList.remove('selected'));
+    demoGender = null;
+    demoAge = null;
+    demoPolitic = null;
+    document.getElementById('btn-see-results').disabled = true;
+    showScreen('screen-demographics');
+  }
+
+  function selectDemo(field, value, btn) {
+    const groupMap = { gender: 'demo-gender-options', age: 'demo-age-options', politic: 'demo-politic-options' };
+    document.querySelectorAll(`#${groupMap[field]} .demo-opt`).forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    if (field === 'gender') demoGender = value;
+    else if (field === 'age') demoAge = value;
+    else demoPolitic = value;
+    if (demoGender && demoAge && demoPolitic) document.getElementById('btn-see-results').disabled = false;
+  }
+
+  function finishDemographics() {
+    showResults();
   }
 
   function getCeoType(x, y) {
@@ -962,11 +1243,11 @@
 
   function computeResultSquare(scores) {
     // Grid position of each axis as a 2D point on the map
-    // [0]=Approach, [1]=Risk Tolerance, [2]=Social Aptitude, [3]=Spontaneity
+    // [0]=Approach, [1]=Risk Tolerance, [2]=Apathy, [3]=Spontaneity
     const pos = [
       { x: 0,          y: scores[0]  },  // Approach: vertical axis
       { x: scores[1],  y: 0          },  // Risk Tolerance: horizontal axis
-      { x: scores[2],  y: scores[2]  },  // Social Aptitude: / diagonal → dist = |sa|×√2
+      { x: scores[2],  y: scores[2]  },  // Apathy: / diagonal → dist = |sa|×√2
       { x: scores[3],  y: -scores[3] },  // Spontaneity: \ diagonal   → dist = |sp|×√2
     ];
 
@@ -1063,7 +1344,7 @@
       x1: gX, y1: gY, x2: gX + gW, y2: gY + gH,
       stroke: '#22c55e', 'stroke-width': 1.5, 'stroke-dasharray': '5 7', opacity: 0.6
     }));
-    // Social Aptitude (/): Introvert bottom-left → Extrovert top-right
+    // Apathy (/): Concerned bottom-left → Inert top-right
     svg.appendChild(el('line', {
       x1: gX, y1: gY + gH, x2: gX + gW, y2: gY,
       stroke: '#a855f7', 'stroke-width': 1.5, 'stroke-dasharray': '5 7', opacity: 0.6
@@ -1096,19 +1377,19 @@
 
     // Corner labels (outside grid corners)
     lbl(gX + 3,      gY - 5,       'MANAGED',   '#22c55e', 'start', 7.5);
-    lbl(gX + gW - 3, gY - 5,       'EXTROVERT', '#a855f7', 'end',   7.5);
-    lbl(gX + 3,      gY + gH + 12, 'INTROVERT', '#a855f7', 'start', 7.5);
+    lbl(gX + gW - 3, gY - 5,       'INERT',     '#a855f7', 'end',   7.5);
+    lbl(gX + 3,      gY + gH + 12, 'CONCERNED', '#a855f7', 'start', 7.5);
     lbl(gX + gW - 3, gY + gH + 12, 'ADAPTIVE',  '#22c55e', 'end',   7.5);
 
     // Diagonal axis name labels (rotated)
     const diagAngle = Math.atan2(gH, gW) * (180 / Math.PI); // ≈ 31°
-    lbl(cx + 85, cy - 52, 'SOCIAL APTITUDE', '#a855f7', 'middle', 7.5, -diagAngle);
+    lbl(cx + 85, cy - 52, 'APATHY',          '#a855f7', 'middle', 7.5, -diagAngle);
     lbl(cx + 85, cy + 57, 'SPONTANEITY',     '#22c55e', 'middle', 7.5,  diagAngle);
 
     // Dots — one per axis, plotted on its line
     // Risk Tolerance: on horizontal axis at y=cy
     // Approach:       on vertical axis at x=cx
-    // Social Aptitude (/ diagonal): at (px(sa), py(sa))
+    // Apathy (/ diagonal): at (px(sa), py(sa))
     // Spontaneity (\ diagonal):     at (px(sp), py(-sp))
     const dots = [
       { x: px(rt), y: cy,        color: '#e07a22' },
@@ -1189,6 +1470,10 @@
   function retake() {
     answers = new Array(12).fill(null);
     current = 0;
+    demoGender = null;
+    demoAge = null;
+    demoPolitic = null;
+    headlineShown = {};
     showScreen('screen-intro');
   }
 </script>
