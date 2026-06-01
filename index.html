@@ -738,7 +738,7 @@
       </div>
       <div class="axis-card">
         <div class="axis-card-name">Apathy</div>
-        <div class="axis-card-poles"><span>Concerned</span> → <span>Inert</span></div>
+        <div class="axis-card-poles"><span>Concerned</span> → <span>Individualist</span></div>
       </div>
       <div class="axis-card">
         <div class="axis-card-name">Spontaneity</div>
@@ -978,7 +978,7 @@
   const AXES = [
     { name: 'Approach',        negLabel: 'People',    posLabel: 'Systems'    },
     { name: 'Risk Tolerance',  negLabel: 'Defender',  posLabel: 'Risk Taker' },
-    { name: 'Apathy',          negLabel: 'Concerned',  posLabel: 'Inert'      },
+    { name: 'Apathy',          negLabel: 'Concerned',  posLabel: 'Individualist'      },
     { name: 'Spontaneity',     negLabel: 'Managed',   posLabel: 'Adaptive'   },
   ];
 
@@ -1370,7 +1370,7 @@
       x1: gX, y1: gY, x2: gX + gW, y2: gY + gH,
       stroke: '#22c55e', 'stroke-width': 1.5, 'stroke-dasharray': '5 7', opacity: 0.6
     }));
-    // Apathy (/): Concerned bottom-left → Inert top-right
+    // Apathy (/): Concerned bottom-left → Individualist top-right
     svg.appendChild(el('line', {
       x1: gX, y1: gY + gH, x2: gX + gW, y2: gY,
       stroke: '#a855f7', 'stroke-width': 1.5, 'stroke-dasharray': '5 7', opacity: 0.6
@@ -1403,7 +1403,7 @@
 
     // Corner labels (outside grid corners)
     lbl(gX + 3,      gY - 5,       'MANAGED',   '#22c55e', 'start', 7.5);
-    lbl(gX + gW - 3, gY - 5,       'INERT',     '#a855f7', 'end',   7.5);
+    lbl(gX + gW - 3, gY - 5,       'INDIVIDUALIST',     '#a855f7', 'end',   7.5);
     lbl(gX + 3,      gY + gH + 12, 'CONCERNED', '#a855f7', 'start', 7.5);
     lbl(gX + gW - 3, gY + gH + 12, 'ADAPTIVE',  '#22c55e', 'end',   7.5);
 
