@@ -1093,6 +1093,7 @@
       headline: 'Springfield, Ohio Grapples With Pet-Eating Rumors',
       body: 'It began with a YouTube clip containing a second-hand account and a Facebook post attributed to the friend of the daughter of a neighbor. The idea that Haitian immigrants were eating pets had already gone viral — spreading to accounts with large followings, until the allegations were repeated by Republican presidential candidates during a nationally televised debate.',
       image: 'headline-misinformation.png',
+      imagePosition: 'top',
       color: '#a855f7',
     },
   };
@@ -1198,6 +1199,7 @@
       document.getElementById('headline-body').textContent = h.body;
       document.getElementById('headline-img').src = h.image;
       document.getElementById('headline-img').alt = h.headline;
+      document.getElementById('headline-img').style.objectPosition = h.imagePosition || 'center';
       document.getElementById('headline-card').style.borderLeftColor = h.color;
       showScreen('screen-headline');
     } else {
