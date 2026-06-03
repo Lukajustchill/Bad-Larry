@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>What Kind of CEO Are You?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -23,7 +26,7 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+      font-family: 'Marcellus', Georgia, serif;
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -44,7 +47,7 @@
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 660px;
+      max-width: 860px;
     }
 
     /* ─── SCREENS ─── */
@@ -341,200 +344,187 @@
     }
 
     /* ─── RESULTS ─── */
-    .results-top {
+    .res-banner {
+      background: linear-gradient(135deg, #131f35 0%, #0d1525 100%);
+      border: 1px solid #2a3d5e;
+      border-radius: 12px;
+      padding: 18px 26px;
+      font-size: clamp(15px, 3.2vw, 20px);
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 14px;
+      letter-spacing: -0.01em;
       text-align: center;
-      padding: 36px 0 44px;
+      line-height: 1.3;
     }
-    .results-eyebrow {
-      margin-bottom: 18px;
-    }
-    .type-code {
-      font-size: clamp(60px, 16vw, 96px);
-      font-weight: 900;
-      letter-spacing: 0.1em;
-      line-height: 1;
-      background: linear-gradient(140deg, var(--gold), var(--gold-light) 60%, #fff6d0);
+    .res-code-highlight {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 12px;
     }
-    .type-desc {
+    .res-persona-gold {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .res-type-desc-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      margin-bottom: 14px;
+    }
+    .res-type-desc {
       font-size: 14px;
-      color: var(--text-muted);
-      letter-spacing: 0.03em;
+      line-height: 1.72;
+      color: var(--text);
     }
-    .ceo-type-label {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
+    .res-traits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 26px;
+    }
+    .res-trait-box {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+    }
+    .res-trait-name {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 10px;
+      margin-bottom: 14px;
     }
-    .ceo-type-name {
-      font-size: clamp(32px, 8vw, 52px);
-      font-weight: 900;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      background: linear-gradient(140deg, var(--gold), var(--gold-light) 60%, #fff6d0);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 6px;
+    .res-trait-body {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
     }
-
-    .profile-grid {
+    .res-trait-letter {
+      width: 38px;
+      height: 38px;
+      min-width: 38px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      font-weight: 800;
+    }
+    .res-trait-desc {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--text);
+      padding-top: 2px;
+    }
+    .res-persona-body {
+      display: grid;
+      grid-template-columns: 1fr 290px;
+      gap: 22px;
+      margin-top: 6px;
+    }
+    .res-info-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .res-info-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
-      margin-bottom: 12px;
     }
-    .profile-card {
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 20px 22px;
-      margin-bottom: 12px;
+    .res-info-item {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
     }
-    .profile-card-title {
-      font-size: 10px;
+    .res-info-label {
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.11em;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
       color: var(--text-muted);
-      margin-bottom: 12px;
     }
-    .trait-list {
+    .res-info-val {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.55;
+      flex: 1;
+    }
+    .res-dog-col {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .res-dog-img {
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+      object-position: center;
+      aspect-ratio: 3/2;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      display: block;
+    }
+    .res-dog-img.missing,
+    .res-dog-img[src=""] { opacity: 0.3; }
+    .res-share-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 7px;
     }
-    .trait-badge {
-      font-size: 12px;
-      font-weight: 600;
-      padding: 4px 11px;
-      border-radius: 20px;
-      background: var(--gold-dim);
-      color: var(--gold);
-      border: 1px solid rgba(240,180,41,0.22);
-    }
-    .dog-breed-value {
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.35;
-    }
-    .ceo-name-list {
-      font-size: 13px;
-      color: var(--text);
-      line-height: 1.75;
-    }
-    .daycare-text {
-      font-size: 13.5px;
-      line-height: 1.65;
-      color: var(--text);
-      margin-bottom: 14px;
-    }
-    .plays-with-row {
+    .share-btn {
+      height: 38px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
       display: flex;
-      align-items: baseline;
-      gap: 8px;
-      padding-top: 12px;
-      border-top: 1px solid var(--card-border);
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s, opacity 0.15s;
+      padding: 0;
     }
-    .plays-with-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-muted);
+    .share-btn:hover { transform: translateY(-2px); opacity: 0.85; }
+    .share-fb { background: #1877F2; }
+    .share-li { background: #0A66C2; }
+    .share-ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+    .share-tt { background: #111; border: 1px solid #333; }
+    .share-wa { background: #25D366; }
+    .share-em { background: #4a5568; }
+    .share-toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      background: #1e3056;
+      color: var(--text);
+      border: 1px solid #2d4a7a;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s, transform 0.25s;
+      z-index: 999;
       white-space: nowrap;
     }
-    .plays-with-value {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--gold);
-    }
-
-    .scores-card {
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 28px;
-      margin-bottom: 28px;
-    }
-    .scores-title {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      margin-bottom: 28px;
-    }
-
-    .axis-row {
-      margin-bottom: 26px;
-    }
-    .axis-row:last-child { margin-bottom: 0; }
-
-    .axis-row-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 10px;
-    }
-    .axis-row-name {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text);
-    }
-    .axis-row-score {
-      font-size: 24px;
-      font-weight: 900;
-      color: var(--gold);
-      letter-spacing: -0.02em;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .bar-track {
-      position: relative;
-      height: 8px;
-      background: rgba(255,255,255,0.04);
-      border-radius: 4px;
-      margin-bottom: 7px;
-    }
-    .bar-center-line {
-      position: absolute;
-      left: 50%;
-      top: -3px;
-      width: 2px;
-      height: 14px;
-      background: rgba(255,255,255,0.1);
-      transform: translateX(-50%);
-      border-radius: 1px;
-    }
-    .bar-fill {
-      position: absolute;
-      top: 0;
-      height: 100%;
-      border-radius: 4px;
-    }
-    .bar-fill.neg {
-      right: 50%;
-      background: linear-gradient(to left, #e05252, #c03030);
-    }
-    .bar-fill.pos {
-      left: 50%;
-      background: linear-gradient(to right, #4f9cf9, #2577dc);
-    }
-
-    .bar-poles {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      color: var(--text-muted);
-      font-weight: 500;
+    .share-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    @media (max-width: 680px) {
+      .res-traits-grid { grid-template-columns: 1fr; }
+      .res-persona-body { grid-template-columns: 1fr; }
+      .res-dog-col { flex-direction: row; align-items: flex-start; gap: 14px; }
+      .res-dog-img { width: 160px; min-width: 160px; aspect-ratio: 3/2; }
+      .res-share-row { display: grid; grid-template-columns: repeat(3, 1fr); flex: 1; }
     }
 
     /* ─── DEMOGRAPHICS ─── */
@@ -668,36 +658,15 @@
       font-style: italic;
     }
 
-    /* ─── RESULTS ─── */
     .results-footer {
       text-align: center;
+      margin-top: 28px;
     }
     .results-credit {
       font-size: 12px;
       color: var(--text-muted);
       margin-bottom: 18px;
       opacity: 0.7;
-    }
-
-    .dotmap-card {
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 28px;
-      margin-bottom: 28px;
-      overflow: hidden;
-    }
-    .dotmap-title {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-    }
-    #dot-map {
-      width: 100%;
-      display: block;
     }
   </style>
 </head>
@@ -708,7 +677,7 @@
   <div class="screen active" id="screen-intro">
     <div class="intro-eyebrow"><span class="label">CEO Personality Quiz</span></div>
     <h1 class="intro-title">What Kind of<br><em>CEO Are You?</em></h1>
-    <p class="intro-sub">For each question, choose how strongly you lean toward A or B on a 6-point scale. You'll get a raw score across four leadership axes.</p>
+    <p class="intro-sub">This quiz is 12 questions long and is designed to reveal how you naturally handle decisions and situations in your own life. At the same time, each question is grounded in the kinds of real-world dilemmas that CEOs face every day. By comparing your instincts to how leaders actually respond, we can categorize your personality and help you understand what kind of decision-maker you really are.</p>
 
     <div class="intro-meta">
       <div class="intro-stat">
@@ -738,7 +707,7 @@
       </div>
       <div class="axis-card">
         <div class="axis-card-name">Apathy</div>
-        <div class="axis-card-poles"><span>Concerned</span> → <span>Individualist</span></div>
+        <div class="axis-card-poles"><span>Concerned</span> → <span>Indifferent</span></div>
       </div>
       <div class="axis-card">
         <div class="axis-card-name">Spontaneity</div>
@@ -836,52 +805,84 @@
 
   <!-- ─── RESULTS ─── -->
   <div class="screen" id="screen-results">
-    <div class="results-top">
-      <div class="results-eyebrow"><span class="label">Your Results</span></div>
-      <div class="ceo-type-label">You are</div>
-      <div class="ceo-type-name" id="ceo-type-name"></div>
-    </div>
 
-    <div class="profile-grid">
-      <div class="profile-card" style="margin-bottom:0">
-        <div class="profile-card-title">Traits</div>
-        <div class="trait-list" id="trait-list"></div>
+    <!-- TYPE SECTION -->
+    <div class="res-banner">
+      Your CEO Personality Type:&nbsp;<span class="res-code-highlight" id="res-type-code-display"></span>
+    </div>
+    <div class="res-type-desc-card">
+      <p class="res-type-desc" id="res-type-desc"></p>
+    </div>
+    <div class="res-traits-grid" id="res-traits-grid"></div>
+
+    <!-- PERSONA SECTION -->
+    <div class="res-banner">
+      Your CEO Persona:&nbsp;<span class="res-persona-gold" id="res-persona-name"></span>
+    </div>
+    <div class="res-persona-body">
+      <div class="res-info-grid">
+        <div class="res-info-row">
+          <div class="res-info-item">
+            <span class="res-info-label">Characteristics</span>
+            <div class="res-info-val" id="res-characteristics"></div>
+          </div>
+          <div class="res-info-item">
+            <span class="res-info-label">Breed</span>
+            <div class="res-info-val" id="res-breed"></div>
+          </div>
+        </div>
+        <div class="res-info-row">
+          <div class="res-info-item">
+            <span class="res-info-label">Motto</span>
+            <div class="res-info-val" id="res-motto"></div>
+          </div>
+          <div class="res-info-item">
+            <span class="res-info-label">Dog Rule</span>
+            <div class="res-info-val" id="res-dog-rule"></div>
+          </div>
+        </div>
+        <div class="res-info-row">
+          <div class="res-info-item">
+            <span class="res-info-label">Comparators</span>
+            <div class="res-info-val" id="res-comparators"></div>
+          </div>
+          <div class="res-info-item">
+            <span class="res-info-label">Dog Daycare</span>
+            <div class="res-info-val" id="res-dog-daycare"></div>
+          </div>
+        </div>
       </div>
-      <div class="profile-card" style="margin-bottom:0">
-        <div class="profile-card-title">Your Dog Breed</div>
-        <div class="dog-breed-value" id="dog-breed-value"></div>
+      <div class="res-dog-col">
+        <img class="res-dog-img" id="res-dog-img" src="" alt="" onerror="this.classList.add('missing')" />
+        <div class="res-share-row">
+          <button class="share-btn share-fb" onclick="shareFacebook()" title="Share on Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </button>
+          <button class="share-btn share-li" onclick="shareLinkedin()" title="Share on LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </button>
+          <button class="share-btn share-ig" onclick="shareInstagram()" title="Share on Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </button>
+          <button class="share-btn share-tt" onclick="shareTiktok()" title="Share on TikTok">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg>
+          </button>
+          <button class="share-btn share-wa" onclick="shareWhatsapp()" title="Share on WhatsApp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </button>
+          <button class="share-btn share-em" onclick="shareEmail()" title="Share via Email">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </button>
+        </div>
       </div>
-    </div>
-
-    <div class="profile-card">
-      <div class="profile-card-title">CEOs Like You</div>
-      <div class="ceo-name-list" id="ceo-name-list"></div>
-    </div>
-
-    <div class="profile-card">
-      <div class="profile-card-title">Doggy Daycare</div>
-      <div class="daycare-text" id="daycare-text"></div>
-      <div class="plays-with-row">
-        <span class="plays-with-label">Plays well with</span>
-        <span class="plays-with-value" id="plays-with-value"></span>
-      </div>
-    </div>
-
-    <div class="scores-card">
-      <div class="scores-title">Axis Scores &nbsp;(−9 to +9)</div>
-      <div id="axes-output"></div>
-    </div>
-
-    <div class="dotmap-card">
-      <div class="dotmap-title">Axis Map</div>
-      <svg id="dot-map" viewBox="0 0 520 310" xmlns="http://www.w3.org/2000/svg"></svg>
     </div>
 
     <div class="results-footer">
-      <p class="results-credit">CEO Quiz Project &middot; Roy Persson + Luke &middot; 2025</p>
-      <button class="btn btn-ghost" onclick="retake()">&#8617; Retake Quiz</button>
+<button class="btn btn-ghost" onclick="retake()">&#8617; Retake Quiz</button>
     </div>
   </div>
+
+  <div class="share-toast" id="share-toast"></div>
 
 </div>
 <script>
@@ -911,76 +912,124 @@
 
   const CEO_PROFILES = {
     'The Optimizer': {
-      traits: ['Analytical', 'Efficient', 'Measured'],
+      characteristics: ['Analytical', 'Efficient', 'Measured'],
       dog: 'Doberman Pinscher',
       ceos: ['Michael Dell', 'Jeff Bezos', 'Bill Gates'],
-      playsWith: 'German Shepherd (The Operator)',
-      daycare: "You thrive in a structured training yard with clear objectives — agility drills, timed circuits, measurable outcomes. Chaos gets reorganized fast. You do best alongside a German Shepherd who matches your discipline and keeps the session on track.",
+      motto: 'Measure twice, cut once.',
+      dogRule: 'Keep a spreadsheet for treats, a process for walks, and a plan for everything else.',
+      dogDaycare: 'Spent recess improving the efficiency of fetch.',
+      dogImage: 'dogs/optimizer.png',
     },
     'The Overseer': {
-      traits: ['Controlling', 'Defensive', 'Deliberate'],
+      characteristics: ['Controlling', 'Defensive', 'Deliberate'],
       dog: 'Rottweiler',
       ceos: ['Jamie Dimon', 'Sam Walton', 'Carlos Ghosn'],
-      playsWith: 'Akita (The Anchor)',
-      daycare: "You prefer a secure, bounded yard with a clear hierarchy and minimal surprises. An Akita is your ideal play partner — steady, loyal, and not prone to reckless behavior. You're not the life of the party, but the other dogs always know exactly where the boundaries are.",
+      motto: 'The devil is in the details.',
+      dogRule: "Always know exactly what's happening in every corner of the yard.",
+      dogDaycare: 'Knows exactly how many treats are in the jar.',
+      dogImage: 'dogs/overseer.png',
     },
     'The Operator': {
-      traits: ['Mechanical', 'Decisive', 'Rigorous'],
+      characteristics: ['Mechanical', 'Decisive', 'Rigorous'],
       dog: 'German Shepherd',
       ceos: ['Bob Iger', 'Tim Cook', 'Jensen Huang', 'Jack Dorsey'],
-      playsWith: 'Doberman Pinscher (The Optimizer)',
-      daycare: "You excel in a purpose-driven environment — obstacle courses, search-and-retrieve, anything with a defined goal. A Doberman Pinscher keeps pace with your precision and won't disrupt your focus. You're at your best when the activity has a point.",
+      motto: 'When the going gets tough, the tough get going.',
+      dogRule: 'Always run the dog park like a well-oiled machine.',
+      dogDaycare: 'Somehow became shift supervisor by 10 a.m.',
+      dogImage: 'dogs/operator.png',
     },
     'The Blitzscaler': {
-      traits: ['Fast', 'Aggressive', 'Risk Tolerant'],
+      characteristics: ['Fast', 'Aggressive', 'Risk Tolerant'],
       dog: 'American Pit Bull Terrier',
       ceos: ['Elon Musk', 'Travis Kalanick', 'Brian Chesky', 'Jack Welch', 'Mark Zuckerberg'],
-      playsWith: 'Golden Retriever (The Crusader)',
-      daycare: "Give you an open field and a starting pistol. You thrive in fast, high-energy sessions where the rules are loose and intensity is high. A Golden Retriever can keep up with your drive and match your enthusiasm — even if they're more focused on making friends along the way.",
+      motto: 'Go big or go home.',
+      dogRule: 'See a fence, jump the fence.',
+      dogDaycare: 'Found the biggest dog, then challenged it to a race.',
+      dogImage: 'dogs/blitzscaler.png',
     },
     'The Harmonizer': {
-      traits: ['Adaptable', 'Steady', 'Pragmatic'],
+      characteristics: ['Adaptable', 'Steady', 'Pragmatic'],
       dog: 'Goldendoodle',
       ceos: ['Andy Jassy', 'John Donahoe', 'Satya Nadella'],
-      playsWith: 'Almost any breed',
-      daycare: "You're the dog every daycare wishes they had more of. You adapt to whatever the group needs — structured or chaotic, big or small. You drift toward the edges of conflict to smooth things out before they escalate, and somehow every dog leaves liking you.",
+      motto: 'Keep calm and carry on.',
+      dogRule: 'Make sure every dog at the dog park knows who you are.',
+      dogDaycare: 'Is running for a second term as dog mayor.',
+      dogImage: 'dogs/harmonizer.png',
     },
     'The Anchor': {
-      traits: ['Measured', 'Disciplined', 'Risk-Averse'],
+      characteristics: ['Measured', 'Disciplined', 'Risk-Averse'],
       dog: 'Akita',
       ceos: ['Warren Buffett', 'Brian Moynihan', 'Larry Fink'],
-      playsWith: 'Rottweiler (The Overseer)',
-      daycare: "You're selective about your environment and your company. A calm, well-managed yard with familiar dogs suits you far better than a noisy free-for-all. A Rottweiler earns your respect — methodical, serious, and not interested in wasting energy on nonsense.",
+      motto: 'Slow and steady wins the race.',
+      dogRule: 'Knows that not every squirrel is worth chasing.',
+      dogDaycare: "Wasn't distracted by the fake ball throw.",
+      dogImage: 'dogs/anchor.png',
     },
     'The Custodian': {
-      traits: ['Fair', 'Protective', 'Inclusive'],
+      characteristics: ['Fair', 'Protective', 'Inclusive'],
       dog: 'Saint Bernard',
       ceos: ['Paul Polman', 'Emmanuel Farber', 'Marc Benioff'],
-      playsWith: 'Cavalier King Charles Spaniel (The Culture Creator)',
-      daycare: "You're happiest in an inclusive, relaxed setting where every dog feels welcome. You naturally keep an eye on the smaller or shyer dogs in the group. A Cavalier King Charles Spaniel is your natural companion — gentle, social, and always happy to just enjoy the moment together.",
+      motto: 'Take care of the people who take care of you.',
+      dogRule: 'The strongest dogs should look after the smallest.',
+      dogDaycare: 'Stood guard, making sure all the dogs play nice.',
+      dogImage: 'dogs/custodian.png',
     },
     'The Crusader': {
-      traits: ['Charismatic', 'Persuasive'],
+      characteristics: ['Charismatic', 'Persuasive', 'Motivating'],
       dog: 'Golden Retriever',
       ceos: ['Steve Jobs', 'Richard Branson', 'Howard Schultz'],
-      playsWith: 'American Pit Bull Terrier (The Blitzscaler)',
-      daycare: "You light up any yard you walk into. High-energy social play is your element, and you're at your best rallying the group around a shared game. An American Pit Bull Terrier matches your intensity and drive — even if you're the one making sure everyone's having a good time.",
+      motto: 'Nothing is impossible.',
+      dogRule: 'Knows a tennis ball makes friends.',
+      dogDaycare: 'Got all the other dogs looking for hidden treats.',
+      dogImage: 'dogs/crusader.png',
     },
     'The Culture Creator': {
-      traits: ['Approachable', 'Supportive', 'People-Driven'],
+      characteristics: ['Approachable', 'Supportive', 'People-Driven'],
       dog: 'Cavalier King Charles Spaniel',
       ceos: ['Ed Bastian', 'Tony Hsieh', 'Herb Kelleher'],
-      playsWith: 'Saint Bernard (The Custodian)',
-      daycare: "You're built for connection, not competition. A cozy, social daycare where dogs mingle and build bonds is exactly your speed. A Saint Bernard is your perfect companion — steady, warm, and just as focused on everyone feeling included as you are.",
+      motto: 'Teamwork makes the dream work.',
+      dogRule: 'Measures success by counting wagging tails.',
+      dogDaycare: 'Never lets another dog play alone.',
+      dogImage: 'dogs/culture-creator.png',
     },
   };
 
   const AXES = [
-    { name: 'Approach',        negLabel: 'People',    posLabel: 'Systems'    },
-    { name: 'Risk Tolerance',  negLabel: 'Defender',  posLabel: 'Risk Taker' },
-    { name: 'Apathy',          negLabel: 'Concerned',  posLabel: 'Individualist'      },
-    { name: 'Spontaneity',     negLabel: 'Managed',   posLabel: 'Adaptive'   },
+    { name: 'Approach',       negLabel: 'People',     posLabel: 'Systems',     negLetter: 'P', posLetter: 'S' },
+    { name: 'Risk Tolerance', negLabel: 'Defender',   posLabel: 'Risk Taker',  negLetter: 'D', posLetter: 'R' },
+    { name: 'Apathy',         negLabel: 'Concerned',  posLabel: 'Indifferent', negLetter: 'C', posLetter: 'I' },
+    { name: 'Spontaneity',    negLabel: 'Managed',    posLabel: 'Adaptive',    negLetter: 'M', posLetter: 'A' },
   ];
+
+  const POLE_DESCRIPTIONS = {
+    P: { name: 'PEOPLE',      color: '#4a90d9', desc: 'You are energized by people more than processes. You tend to prioritize relationships, culture, and human needs when making decisions.' },
+    S: { name: 'SYSTEMS',     color: '#4a90d9', desc: 'You are energized by building structures that work. You tend to focus on efficiency, scalability, and creating systems that can perform reliably over time.' },
+    D: { name: 'DEFENDER',    color: '#e07a22', desc: 'You prefer protecting what has already been built. You value stability, predictability, and thoughtful decision-making over unnecessary risk.' },
+    R: { name: 'RISK TAKER',  color: '#e07a22', desc: 'You are comfortable making bold moves when opportunity appears. You believe growth often requires uncertainty and are willing to act before all the answers are known.' },
+    C: { name: 'CONCERNED',   color: '#a855f7', desc: 'You believe people and institutions have a responsibility to help address societal challenges. You tend to consider the broader impact of decisions on communities and stakeholders.' },
+    I: { name: 'INDIFFERENT', color: '#a855f7', desc: 'You believe societal challenges are best addressed by free markets and systems than cause-driven intervention. You lean toward self-determination, accountability, and solutions that arrive naturally.' },
+    M: { name: 'MANAGED',     color: '#22c55e', desc: 'You prefer planning before acting. You value structure, preparation, and maintaining control as situations evolve.' },
+    A: { name: 'ADAPTIVE',    color: '#22c55e', desc: 'You prefer acting on emerging information. You are comfortable adjusting plans as situations develop and trust your ability to course-correct on the fly.' },
+  };
+
+  const TYPE_DESCRIPTIONS = {
+    PDCM: "You are a relationship-focused leader who values stability, believes institutions have responsibilities beyond profit, and prefers thoughtful planning over rapid improvisation. Your leadership style often centers on protecting people, strengthening culture, and building sustainable long-term success.",
+    PDCA: "You place people at the center of leadership and believe institutions have a responsibility to support society. While you prefer stability over unnecessary risk, you remain flexible and responsive when circumstances demand change.",
+    PDIM: "You are a steady, relationship-focused leader who values predictability and personal responsibility. You prefer thoughtful planning, clear expectations, and creating environments where people can succeed through their own efforts.",
+    PDIA: "You lead through trust, relationships, and practical problem-solving. While you generally favor stability and self-determination over intervention, you are comfortable adjusting your approach as situations evolve.",
+    PRCM: "You are driven by bold goals but believe success should create benefits beyond the organization itself. You pursue ambitious opportunities while maintaining enough structure and planning to keep people aligned and moving forward together.",
+    PRCA: "You are an energetic changemaker who combines ambition with a strong sense of social responsibility. You thrive in dynamic environments, inspiring others through both your vision and your willingness to act quickly.",
+    PRIM: "You enjoy pursuing growth and opportunity while trusting individuals to shape their own outcomes. While you are comfortable taking calculated risks, you prefer to do so within a framework of planning, discipline, and accountability.",
+    PRIA: "You are a highly independent leader who values initiative, freedom, and action. Comfortable with uncertainty and rapid change, you trust people to find their own path and rarely let rigid plans slow you down.",
+    SDCM: "You believe strong institutions are built through structure, discipline, and thoughtful planning. While you value stability and risk management, you also believe organizations have a responsibility to contribute positively to society.",
+    SDCA: "You focus on building reliable systems that serve both organizational goals and broader stakeholder needs. Although you prefer stability over disruption, you are willing to adapt when changing circumstances require a new approach.",
+    SDIM: "You believe success comes from strong systems, clear rules, and disciplined execution. You value stability, personal responsibility, and careful planning over rapid change or institutional intervention.",
+    SDIA: "You are a practical operator who trusts proven systems and established processes. While you generally prefer stability, you remain flexible enough to adjust when conditions change and performance demands it.",
+    SRCM: "You enjoy building ambitious organizations and pursuing transformative opportunities through structured execution. While comfortable with risk, you believe growth should be managed responsibly and with consideration for its broader impact on society.",
+    SRCA: "You are a bold innovator who enjoys challenging convention and creating new possibilities. You combine a desire for growth and transformation with a belief that organizations should help address larger societal challenges.",
+    SRIM: "You see growth as the result of strong systems, calculated risk-taking, and disciplined execution. You prefer organizations to focus on performance and accountability, trusting markets and individuals to solve most problems on their own.",
+    SRIA: "You are an entrepreneurial builder who thrives on speed, opportunity, and change. Comfortable with uncertainty and driven by results, you trust capable people and effective systems to find their way without excessive oversight.",
+  };
 
   const SCALE = [
     { label: 'Fully A',    value: -3 },
@@ -1328,170 +1377,107 @@
     return { x: mx, y: my, neutral: false };
   }
 
-  function buildDotMap(scores, result) {
-    const ap = scores[0], rt = scores[1], sa = scores[2], sp = scores[3];
+  const QUIZ_URL = 'https://your-quiz-url-here.com';
+  let currentResults = { typeCode: '', ceoType: '' };
 
-    const gX = 70, gY = 42, gW = 380, gH = 226;
-    const cx = gX + gW / 2;
-    const cy = gY + gH / 2;
-
-    const px = s => cx + (s / 9) * (gW / 2);
-    const py = s => cy - (s / 9) * (gH / 2);
-
-    const ns = 'http://www.w3.org/2000/svg';
-    function el(tag, attrs, txt) {
-      const e = document.createElementNS(ns, tag);
-      Object.entries(attrs).forEach(([k, v]) => e.setAttribute(k, v));
-      if (txt !== undefined) e.textContent = txt;
-      return e;
-    }
-
-    const svg = document.getElementById('dot-map');
-    svg.innerHTML = '';
-
-    // Grid background
-    svg.appendChild(el('rect', { x: gX, y: gY, width: gW, height: gH, fill: '#0d1525' }));
-
-    // Grid lines (18 divisions = one per score unit)
-    for (let i = 0; i <= 18; i++) {
-      svg.appendChild(el('line', {
-        x1: gX + i * gW / 18, y1: gY, x2: gX + i * gW / 18, y2: gY + gH,
-        stroke: '#1e2d47', 'stroke-width': 0.5
-      }));
-      svg.appendChild(el('line', {
-        x1: gX, y1: gY + i * gH / 18, x2: gX + gW, y2: gY + i * gH / 18,
-        stroke: '#1e2d47', 'stroke-width': 0.5
-      }));
-    }
-
-    // Diagonal reference lines
-    // Spontaneity (\): Managed top-left → Adaptive bottom-right
-    svg.appendChild(el('line', {
-      x1: gX, y1: gY, x2: gX + gW, y2: gY + gH,
-      stroke: '#22c55e', 'stroke-width': 1.5, 'stroke-dasharray': '5 7', opacity: 0.6
-    }));
-    // Apathy (/): Concerned bottom-left → Individualist top-right
-    svg.appendChild(el('line', {
-      x1: gX, y1: gY + gH, x2: gX + gW, y2: gY,
-      stroke: '#a855f7', 'stroke-width': 1.5, 'stroke-dasharray': '5 7', opacity: 0.6
-    }));
-
-    // Main axis lines
-    svg.appendChild(el('line', { x1: gX, y1: cy, x2: gX + gW, y2: cy, stroke: '#e07a22', 'stroke-width': 1.8 }));
-    svg.appendChild(el('line', { x1: cx, y1: gY, x2: cx, y2: gY + gH, stroke: '#4a90d9', 'stroke-width': 1.8 }));
-
-    // Label helper
-    function lbl(x, y, txt, color, anchor, size, rotate) {
-      const t = el('text', {
-        x, y,
-        fill: color,
-        'font-size': size || 8.5,
-        'font-family': '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-        'font-weight': '700',
-        'letter-spacing': '0.08em',
-        'text-anchor': anchor || 'middle',
-      }, txt);
-      if (rotate) t.setAttribute('transform', `rotate(${rotate}, ${x}, ${y})`);
-      svg.appendChild(t);
-    }
-
-    // Axis pole labels (inside grid edges)
-    lbl(cx, gY + 13,       'SYSTEMS',    '#4a90d9');
-    lbl(cx, gY + gH - 7,   'PEOPLE',     '#4a90d9');
-    lbl(gX + 8,  cy - 6,   'DEFENDER',   '#e07a22', 'start');
-    lbl(gX + gW - 8, cy - 6, 'RISK TAKER', '#e07a22', 'end');
-
-    // Corner labels (outside grid corners)
-    lbl(gX + 3,      gY - 5,       'MANAGED',   '#22c55e', 'start', 7.5);
-    lbl(gX + gW - 3, gY - 5,       'INDIVIDUALIST',     '#a855f7', 'end',   7.5);
-    lbl(gX + 3,      gY + gH + 12, 'CONCERNED', '#a855f7', 'start', 7.5);
-    lbl(gX + gW - 3, gY + gH + 12, 'ADAPTIVE',  '#22c55e', 'end',   7.5);
-
-    // Diagonal axis name labels (rotated)
-    const diagAngle = Math.atan2(gH, gW) * (180 / Math.PI); // ≈ 31°
-    lbl(cx + 85, cy - 52, 'APATHY',          '#a855f7', 'middle', 7.5, -diagAngle);
-    lbl(cx + 85, cy + 57, 'SPONTANEITY',     '#22c55e', 'middle', 7.5,  diagAngle);
-
-    // Dots — one per axis, plotted on its line
-    // Risk Tolerance: on horizontal axis at y=cy
-    // Approach:       on vertical axis at x=cx
-    // Apathy (/ diagonal): at (px(sa), py(sa))
-    // Spontaneity (\ diagonal):     at (px(sp), py(-sp))
-    const dots = [
-      { x: px(rt), y: cy,        color: '#e07a22' },
-      { x: cx,     y: py(ap),    color: '#4a90d9' },
-      { x: px(sa), y: py(sa),    color: '#a855f7' },
-      { x: px(sp), y: py(-sp),   color: '#22c55e' },
-    ];
-
-    dots.forEach(d => {
-      const dx = Math.max(gX, Math.min(gX + gW, d.x));
-      const dy = Math.max(gY, Math.min(gY + gH, d.y));
-      svg.appendChild(el('circle', { cx: dx, cy: dy, r: 13, fill: d.color, opacity: 0.18 }));
-      svg.appendChild(el('circle', { cx: dx, cy: dy, r: 8,  fill: d.color }));
-      svg.appendChild(el('circle', { cx: dx - 2, cy: dy - 2.5, r: 2, fill: 'rgba(255,255,255,0.38)' }));
-    });
-
-    // ─── Yellow result square ───
-    // Fills exactly one grid cell. Grid lines sit at integer scores (-9…+9).
-    // For positive x the cell spans from grid line (x-1) to (x); for negative, (x) to (x+1).
-    // SVG y is inverted: for positive y (Systems) the cell spans py(y) to py(y-1).
-    const cellW = gW / 18;
-    const cellH = gH / 18;
-    const sqX = result.x > 0 ? px(result.x - 1) : px(result.x);
-    const sqY = result.y > 0 ? py(result.y)      : py(result.y + 1);
-    // Glow
-    svg.appendChild(el('rect', { x: sqX - 3, y: sqY - 3, width: cellW + 6, height: cellH + 6, fill: '#ffd700', opacity: 0.2, rx: 2 }));
-    // Square — fills the cell exactly
-    svg.appendChild(el('rect', { x: sqX, y: sqY, width: cellW, height: cellH, fill: '#ffd700' }));
+  function getTypeCode(scores) {
+    return scores.map((s, i) => s > 0 ? AXES[i].posLetter : AXES[i].negLetter).join('');
   }
 
   function showResults() {
     const scores = [0, 0, 0, 0];
-    QUESTIONS.forEach((q, i) => {
-      scores[q.axis] += answers[i];
-    });
+    QUESTIONS.forEach((q, i) => { scores[q.axis] += answers[i]; });
 
     const result = computeResultSquare(scores);
     const ceoType = getCeoType(result.x, result.y);
+    const typeCode = getTypeCode(scores);
+    currentResults = { typeCode, ceoType };
+
     submitData(scores, ceoType);
-    document.getElementById('ceo-type-name').textContent = ceoType;
 
-    const profile = CEO_PROFILES[ceoType];
-    document.getElementById('trait-list').innerHTML = profile.traits.map(t => `<span class="trait-badge">${t}</span>`).join('');
-    document.getElementById('dog-breed-value').textContent = profile.dog;
-    document.getElementById('ceo-name-list').textContent = profile.ceos.join(', ');
-    document.getElementById('daycare-text').textContent = profile.daycare;
-    document.getElementById('plays-with-value').textContent = profile.playsWith;
+    document.getElementById('res-type-code-display').textContent = typeCode;
+    document.getElementById('res-type-desc').textContent = TYPE_DESCRIPTIONS[typeCode] || '';
+    document.getElementById('res-persona-name').textContent = ceoType;
 
-    document.getElementById('axes-output').innerHTML = scores.map((score, i) => {
-      const ax = AXES[i];
-      const isNeg = score < 0;
-      const pct = (Math.abs(score) / 9) * 50;
-      const fillStyle = isNeg
-        ? `class="bar-fill neg" style="width:${pct}%"`
-        : `class="bar-fill pos" style="width:${pct}%"`;
-      const scoreStr = (score > 0 ? '+' : '') + score;
+    // Trait boxes: order [Approach, Apathy, Risk, Spontaneity] → top-left, top-right, bottom-left, bottom-right
+    const letters = typeCode.split('');
+    const order = [letters[0], letters[2], letters[1], letters[3]];
+    document.getElementById('res-traits-grid').innerHTML = order.map(letter => {
+      const pole = POLE_DESCRIPTIONS[letter];
       return `
-        <div class="axis-row">
-          <div class="axis-row-header">
-            <span class="axis-row-name">${ax.name}</span>
-            <span class="axis-row-score">${scoreStr}</span>
+        <div class="res-trait-box">
+          <div class="res-trait-name" style="color:${pole.color}">${pole.name}</div>
+          <div class="res-trait-body">
+            <div class="res-trait-letter" style="background:${pole.color}28;border:1px solid ${pole.color}55;color:${pole.color}">${letter}</div>
+            <p class="res-trait-desc">${pole.desc}</p>
           </div>
-          <div class="bar-track">
-            <div class="bar-center-line"></div>
-            <div ${fillStyle}></div>
-          </div>
-          <div class="bar-poles">
-            <span>${ax.negLabel} &nbsp;&minus;9</span>
-            <span>+9&nbsp; ${ax.posLabel}</span>
-          </div>
-        </div>
-      `;
+        </div>`;
     }).join('');
 
+    const profile = CEO_PROFILES[ceoType];
+    document.getElementById('res-characteristics').textContent = profile.characteristics.join(', ');
+    document.getElementById('res-breed').textContent = profile.dog;
+    document.getElementById('res-motto').textContent = profile.motto;
+    document.getElementById('res-dog-rule').textContent = profile.dogRule;
+    document.getElementById('res-comparators').textContent = profile.ceos.join(', ');
+    document.getElementById('res-dog-daycare').textContent = profile.dogDaycare;
+    const img = document.getElementById('res-dog-img');
+    img.classList.remove('missing');
+    img.src = profile.dogImage;
+    img.alt = ceoType;
+
     showScreen('screen-results');
-    buildDotMap(scores, result);
+  }
+
+  function getShareText() {
+    const { typeCode, ceoType } = currentResults;
+    return `I just took the CEO Personality Quiz and got ${typeCode} — ${ceoType}! What's your CEO type? Take the quiz: ${QUIZ_URL}`;
+  }
+  function getShareTitle() {
+    const { typeCode, ceoType } = currentResults;
+    return `My CEO Personality Type: ${typeCode} — ${ceoType}`;
+  }
+  function showShareToast(msg) {
+    const t = document.getElementById('share-toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+  function shareFacebook() {
+    const text = getShareText();
+    window.open(
+      `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(QUIZ_URL)}&quote=${encodeURIComponent(text)}`,
+      '_blank', 'width=600,height=400'
+    );
+  }
+  function shareLinkedin() {
+    const title   = encodeURIComponent(getShareTitle());
+    const summary = encodeURIComponent(getShareText());
+    const url     = encodeURIComponent(QUIZ_URL);
+    window.open(
+      `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${title}&summary=${summary}`,
+      '_blank', 'width=600,height=500'
+    );
+  }
+  function shareInstagram() {
+    navigator.clipboard.writeText(getShareText())
+      .then(() => showShareToast('✓ Message copied — paste it into your Instagram post!'))
+      .catch(() => showShareToast('Open Instagram and paste your result manually.'));
+    window.open('https://www.instagram.com/', '_blank');
+  }
+  function shareTiktok() {
+    navigator.clipboard.writeText(getShareText())
+      .then(() => showShareToast('✓ Message copied — paste it into your TikTok post!'))
+      .catch(() => showShareToast('Open TikTok and paste your result manually.'));
+    window.open('https://www.tiktok.com/', '_blank');
+  }
+  function shareWhatsapp() {
+    window.open(`https://wa.me/?text=${encodeURIComponent(getShareText())}`, '_blank');
+  }
+  function shareEmail() {
+    const subject = encodeURIComponent(getShareTitle());
+    const body    = encodeURIComponent(getShareText());
+    window.location.href = `mailto:?subject=${subject}&body=${body}`;
   }
 
   function retake() {
