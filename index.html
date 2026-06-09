@@ -1354,7 +1354,7 @@
     const result = computeResultSquare(scores);
     const ceoType = getCeoType(result.x, result.y);
     const typeCode = getTypeCode(scores);
-    currentResults = { typeCode, ceoType };
+    currentResults = { typeCode, ceoType, dogBreed: CEO_PROFILES[ceoType]?.dog || '' };
 
     submitData(scores, ceoType);
 
@@ -1393,8 +1393,8 @@
   }
 
   function getShareText() {
-    const { typeCode, ceoType } = currentResults;
-    return `I just took the CEO Personality Quiz and got ${typeCode} — ${ceoType}! What's your CEO type? Take the quiz: ${QUIZ_URL}`;
+    const { typeCode, ceoType, dogBreed } = currentResults;
+    return `I just took the CEO Personality Quiz and got ${typeCode} — ${ceoType} (${dogBreed})! What's your CEO type? Take the quiz: ${QUIZ_URL}`;
   }
   function getShareTitle() {
     const { typeCode, ceoType } = currentResults;
