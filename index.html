@@ -660,12 +660,30 @@
     .results-footer {
       text-align: center;
       margin-top: 28px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
     }
     .results-credit {
       font-size: 12px;
       color: var(--text-muted);
       margin-bottom: 18px;
       opacity: 0.7;
+    }
+
+    /* ─── PRINT / PDF ─── */
+    @media print {
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      body { background: #09101f !important; padding: 24px 16px; }
+      body::before { display: none; }
+      .screen { display: none !important; }
+      #screen-results { display: block !important; }
+      .results-footer { display: none !important; }
+      .res-share-row { display: none !important; }
+      .btn.btn-primary[onclick="copyResult()"] { display: none !important; }
+      .share-toast { display: none !important; }
+      .res-dog-col { gap: 8px; }
+      .res-persona-body { grid-template-columns: 1fr 220px; }
     }
   </style>
 </head>
@@ -842,7 +860,11 @@
     </div>
 
     <div class="results-footer">
-<button class="btn btn-ghost" onclick="retake()">&#8617; Retake Quiz</button>
+      <button class="btn btn-ghost" onclick="retake()">&#8617; Retake Quiz</button>
+      <button class="btn btn-primary" onclick="downloadPDF()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download PDF
+      </button>
     </div>
   </div>
 
@@ -1448,6 +1470,9 @@
     window.location.href = `mailto:?subject=${subject}&body=${body}`;
   }
 
+  function downloadPDF() {
+    window.print();
+  }
   function retake() {
     answers = new Array(12).fill(null);
     current = 0;
