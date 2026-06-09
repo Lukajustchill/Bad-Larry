@@ -860,6 +860,7 @@
     const payload = JSON.stringify({
       path:       pathVariant,
       ceoType:    ceoType,
+      dogBreed:   CEO_PROFILES[ceoType]?.dog || '',
       answers:    answers,
       scores:     scores,
       gender:     demoGender,
