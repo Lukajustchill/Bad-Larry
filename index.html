@@ -720,7 +720,6 @@
 
   <!-- ─── HEADLINE (Path B) ─── -->
   <div class="screen" id="screen-headline">
-    <div class="headline-eyebrow"><span class="label" id="headline-tag"></span></div>
     <div class="headline-card" id="headline-card">
       <img class="headline-img" id="headline-img" src="" alt="" />
       <div class="headline-source">Latest News</div>
@@ -1227,7 +1226,6 @@
     if (pathVariant === 'B' && HEADLINES[idx] && !headlineShown[idx]) {
       headlineShown[idx] = true;
       const h = HEADLINES[idx];
-      document.getElementById('headline-tag').textContent = h.tag;
       document.getElementById('headline-hed').textContent = h.headline;
       document.getElementById('headline-body').textContent = h.body;
       document.getElementById('headline-img').src = h.image;
